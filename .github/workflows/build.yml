@@ -503,11 +503,15 @@ jobs:
         version: ${{ inputs.version }}
         bypass: true
 
-    - name: Enable Btrfs filesystem in kernel config
+    - name: Enable Btrfs, KVM, and virtual framebuffer support
       uses: ./.github/actions/set-kernel-config
       with:
         config_list: |
           CONFIG_BTRFS_FS=y
+          CONFIG_VIRTUALIZATION=y
+          CONFIG_KVM=y
+          CONFIG_FB=y
+          CONFIG_FB_VIRTUAL=y
 
     - name: Build Normal Kernel
       env:
